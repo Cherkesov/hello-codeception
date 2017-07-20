@@ -7,6 +7,7 @@
 
 SELENIUM="selenium-server-standalone.jar"
 PORT=4444
+PROCESS="selenium-server-standalone"
 
 if [ "$(uname)" == "Darwin" ]; then
     OS_TYPE="MAC_OS"
@@ -20,10 +21,12 @@ elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
     OS_TYPE="WINDOWS"
     DRIVER_FILE="./chromedriver.exe"
     CODECEPT="vendor/bin/codecept.bat"
+    PROCESS="/java"
 elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ]; then
     OS_TYPE="WINDOWS"
     DRIVER_FILE="./chromedriver.exe"
     CODECEPT="vendor/bin/codecept.bat"
+    PROCESS="/java"
 fi
 
 check_selenium_start () {
@@ -35,7 +38,7 @@ check_selenium_start () {
 java -jar ${SELENIUM} start -Dwebdriver.chrome.driver=${DRIVER_FILE} > /dev/null & \
     (check_selenium_start && ${CODECEPT} run --steps)
 
-pid=$(ps -ax | grep ${SELENIUM} | grep -v ' grep ' | awk '{print $1}')
+pid=$(ps -ax | grep ${PROCESS} | grep -v ' grep ' | awk '{print $1}')
 if [ ! -z "$pid" ]; then
     kill -9 ${pid}
 fi
