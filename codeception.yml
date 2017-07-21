@@ -8,6 +8,14 @@ suites:
                 - WebDriver:
                     url: https://stackoverflow.com/
                     browser: chrome
+
+                    # If you want to launch Chrome headlessly
+#                    window_size: false
+#                    capabilities:
+#                      chromeOptions:
+#                        args: ["--headless", "--disable-gpu"]
+#                        binary: "/usr/bin/google-chrome"
+
                 - \Helper\Acceptance
                 - \Helper\ProtectedUserRepo
                 - \Helper\Wildfowl
