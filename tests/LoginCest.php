@@ -12,6 +12,7 @@ class LoginCest
     public function loginSuccessfully(AcceptanceTester $I)
     {
         $I->wantTo('Ensure that login work fine for correct credentials');
+        $I->randSleep();
 
         $user = $I->getRandUserByRoles(['STACKOVERFLOW_USER']);
 
@@ -29,6 +30,7 @@ class LoginCest
     public function loginWithInvalidPassword(AcceptanceTester $I)
     {
         $I->wantTo('Ensure that login work fine for incorrect credentials');
+        $I->randSleep();
 
         $I->fillField('#email', 'hello-wildfowl@gmail.com');
         $I->fillField('#password', 'hello-wildfowl-123456');

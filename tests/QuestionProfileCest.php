@@ -10,6 +10,8 @@ class QuestionProfileCest
         $links = $I->getElementsBy('.question-hyperlink', $res[0]);
         $firstPostLink = $links[0];
 
+        $I->randSleep(1, 5);
+
         $title = $firstPostLink->getText();
         $url = $firstPostLink->getAttribute('href');
         $uri = $I->getUriFrom($url);

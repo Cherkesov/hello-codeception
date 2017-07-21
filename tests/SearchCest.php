@@ -9,6 +9,7 @@ class SearchCest
         $I->amOnPage('/');
 
         $I->fillField('[name="q"]', 'mining');
+        $I->randSleep(1, 5);
         $I->click('.js-search-submit');
 
         $I->canSeeInCurrentUrl('/search?');

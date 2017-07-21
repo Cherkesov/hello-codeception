@@ -9,6 +9,18 @@ use Facebook\WebDriver\WebDriverBy;
 class Wildfowl extends Module
 {
     /**
+     * Wait for random time if you want to bypass "is-human" validations
+     *
+     * @param int $min
+     * @param int $max
+     * @return void
+     */
+    public function randSleep($min = 1, $max = 10)
+    {
+        sleep(rand($min, $max));
+    }
+
+    /**
      * @param $selector
      * @param null|\Facebook\WebDriver\Remote\RemoteWebElement $parent
      * @param null $text

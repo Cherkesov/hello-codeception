@@ -30,13 +30,15 @@ elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ]; then
 fi
 
 check_selenium_start () {
-    while ! nc -z localhost ${PORT}; do
+    while ! nc localhost ${PORT} < /dev/null; do
         sleep 0.5
     done
 }
 
 java -jar ${SELENIUM} start -Dwebdriver.chrome.driver=${DRIVER_FILE} > /dev/null & \
     (check_selenium_start && ${CODECEPT} run --steps)
+
+#echo "Selenium PID: ${SELENIUM_PID}"
 
 pid=$(ps -ax | grep ${PROCESS} | grep -v ' grep ' | awk '{print $1}')
 if [ ! -z "$pid" ]; then
